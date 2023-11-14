@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
            'last_name' => 'Valiyev',
            'email' => 'Ali@gmail.com',
            'phone' => '90 900 00 42',
-            'password' => Hash::make('parol'),
+            'password' => 'parol',
         ]);
 
         $admin->roles()->attach(1);
