@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        return Product::with('stocks')->get();
     }
 
     /**
@@ -37,16 +37,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return Product::with('stocks')->find($product->id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

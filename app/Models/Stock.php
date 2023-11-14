@@ -5,16 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Stock extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-      'name'
+        'product_id',
+        'attribute',
+        'quantity',
     ];
 
-    public function users()
+    public function product()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(Product::class);
     }
 }

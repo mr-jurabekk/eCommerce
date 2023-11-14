@@ -6,16 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class Category extends Model
+class Value extends Model
 {
     use HasFactory, HasTranslations;
 
-    protected $fillable = ['name', 'icon', 'order'];
-
     public  $translatable = ['name'];
 
-    public function products()
+    protected $fillable = [
+        'attribute_id',
+        'product_id',
+        'name',
+    ];
+
+    public function attribute()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Attribute::class);
     }
 }
