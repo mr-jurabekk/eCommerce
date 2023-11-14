@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use function Symfony\Component\Routing\Loader\Configurator\collection;
 
 class ProductController extends Controller
 {
@@ -13,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::with('stocks')->get();
+        return ProductResource::collection(Product::cursorPaginate(10));
     }
 
     /**
