@@ -18,7 +18,11 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AttributeSeeder::class,
             ValueSeeder::class,
+            UserAddressSeeder::class,
             ProductSeeder::class,
+            DeliveryMethodSeeder::class,
+            PaymentTypeSeeder::class,
+            UserAddressSeeder::class,
 
 
         ]);
