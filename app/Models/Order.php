@@ -16,6 +16,7 @@ class Order extends Model
         'sum',
         'delivery_method_id',
         'payment_type_id',
+        'status_id',
         'products',
         'address',
     ];
@@ -24,6 +25,7 @@ class Order extends Model
       'products' => 'array',
         'address' => 'array',
     ];
+
 
     public function user()
     {
@@ -38,5 +40,10 @@ class Order extends Model
     public function paymentType()
     {
         return $this->belongsTo(PaymentType::class);
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 }
