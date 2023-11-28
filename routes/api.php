@@ -6,6 +6,8 @@ use App\Http\Controllers\CategoryProductController;
 use App\Http\Controllers\DeliveryMethodController;
 use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductReviewController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\StatusOrderController;
 use App\Http\Controllers\PaymentTypeController;
@@ -45,4 +47,6 @@ Route::apiResources([
     'payment-types' => PaymentTypeController::class,
     'user-addresses' => UserAddressController::class,
     'user-payment-cards' => UserPaymentCardsController::class,
+    'reviews' => ReviewController::class,
+    'products.reviews' => ProductReviewController::class,
 ]);
