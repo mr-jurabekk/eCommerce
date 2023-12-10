@@ -13,6 +13,6 @@ class Attribute extends Model
 
     public function value()
     {
-        return $this->hasMany(Value::class);
+        return $this->morphMany(Value::class, 'valuable');
     }
 }

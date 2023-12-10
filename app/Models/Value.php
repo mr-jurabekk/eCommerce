@@ -12,14 +12,10 @@ class Value extends Model
 
     public  $translatable = ['name'];
 
-    protected $fillable = [
-        'attribute_id',
-        'product_id',
-        'name',
-    ];
+    protected $fillable = ['name'];
 
-    public function attribute()
+    public function valuable()
     {
-        return $this->belongsTo(Attribute::class);
+        return $this->morphTo();
     }
 }

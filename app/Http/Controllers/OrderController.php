@@ -86,17 +86,12 @@ class OrderController extends Controller
                     $stock->save();
                 }
             }
-            return 'success';
+            return $this->success('order created');
         }
         else{
-            return response([
-               'success' => false,
-               'message' => 'Some products are not found or do not have sufficient number!',
-                'Not found products' => $notFound,
-            ]);
+            return $this->error('Some products are not found or do not have sufficient number!', $notFound);
+
         }
-
-
 
     }
 

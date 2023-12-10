@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @method getTranslations(string $string)
  */
-class CategoryResource extends JsonResource
+class ValueResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
