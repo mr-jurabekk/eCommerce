@@ -2,34 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserSettingResource;
 use App\Models\UserSetting;
 use App\Http\Requests\StoreUserSettingRequest;
 use App\Http\Requests\UpdateUserSettingRequest;
 
 class UserSettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth:sanctum');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
+    public function index()
+    {
+        return UserSettingResource::collection(auth()->user()->settings);
+    }
+
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(StoreUserSettingRequest $request)
     {
-        //
+        if (auth()->user()->settings()->where('setting_id', $request->setting_id)->exists()){
+            return $this->error('this setting already exist');
+        }
+
+        $userSetting = auth()->user()->settings()->create([
+            'setting_id' => $request->setting_id,
+            'value_id' => $request->value_id ?? null,
+            'switch' => $request->switch ?? null
+        ]);
+
+        return $this->success('user setting created', $userSetting);
     }
 
     /**
@@ -53,7 +63,12 @@ class UserSettingController extends Controller
      */
     public function update(UpdateUserSettingRequest $request, UserSetting $userSetting)
     {
-        //
+        $userSetting->update([
+           'switch' => $request->switch ?? null,
+            'value_id' => $request->value_id ?? null
+        ]);
+
+        return $this->success('Usersetting has been updated');
     }
 
     /**
@@ -61,6 +76,8 @@ class UserSettingController extends Controller
      */
     public function destroy(UserSetting $userSetting)
     {
-        //
+        $userSetting->delete();
+
+        return $this->success('UserSetting has benn deleted');
     }
 }

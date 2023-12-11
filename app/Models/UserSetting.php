@@ -15,4 +15,14 @@ class UserSetting extends Model
         'value_id',
         'switch',
     ];
+
+    public function setting()
+    {
+        return $this->belongsTo(Setting::class);
+    }
+
+    public function value()
+    {
+        return $this->belongsTo(Value::class);
+    }
 }

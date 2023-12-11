@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserPaymentCardResource;
 use App\Models\UserPaymentCards;
 use App\Http\Requests\StoreUserPaymentCardsRequest;
 use App\Http\Requests\UpdateUserPaymentCardsRequest;
 
 class UserPaymentCardsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware('auth:sanctum');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function index()
+    {
+        return  UserPaymentCardResource::collection(auth()->user()->paymentCards);
+    }
+
+
     public function create()
     {
-        //
+
     }
 
     /**
@@ -29,7 +30,18 @@ class UserPaymentCardsController extends Controller
      */
     public function store(StoreUserPaymentCardsRequest $request)
     {
-        //
+//            dd(substr($request->number, -4));
+        $card = auth()->user()->paymentCards()->create([
+            'name' => encrypt($request->name),
+            'number' => encrypt($request->number),
+            'holder_name' => encrypt($request->holder_name),
+            'exp_date' => encrypt($request->exp_date),
+            'payment_card_type_id' =>$request->payment_card_type_id,
+            'last_four_numbers' => encrypt(substr($request->number, -4)),
+        ]);
+
+
+        return $this->success('card added');
     }
 
     /**

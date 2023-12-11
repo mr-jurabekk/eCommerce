@@ -23,4 +23,6 @@ class Setting extends Model
     {
         return $this->morphMany(Value::class, 'valuable');
     }
+
+
 }

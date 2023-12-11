@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class UserPaymentCardResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,9 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'setting' => UserSettingResource::collection($this->settings),
-            'date' => $this->created_at,
+            'name' => decrypt($this->name),
+            'number' => '************ '.decrypt($this->last_four_numbers),
+            'card_type' => $this->type
         ];
     }
 }
